@@ -12,7 +12,7 @@ const GALLERY_LINK = 'gallery-link';
 
 searchForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  const queryInput = event.target.elements.query.value;
+  const queryInput = event.target.elements.search.value;
 
   if (queryInput === '') {
     return;
