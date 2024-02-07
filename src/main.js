@@ -57,7 +57,6 @@ const toastOptions = {
   closeOnEscape: true,
   pauseOnHover: false,
   maxWidth: 432,
-  messageSize: '16px',
   messageLineHeight: '24px',
 };
 
@@ -93,14 +92,19 @@ function fetchImages(q) {
     q,
     image_type: 'photo',
     orientation: 'horizontal',
-    safeSearch: true,
+    safesearch: true, 
   });
 
   const PARAMS = `?${searchParams}`;
   const url = BASE_URL + PARAMS;
 
   return fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .catch(error => {
       toastError(`Error fetching images: ${error}`);
       throw error;
